@@ -1,5 +1,6 @@
 # Simple Assets Manager (Laravel 5.3 Package)
 [![Total Downloads](https://poser.pugx.org/canalaiz/sam/downloads)](https://packagist.org/packages/canalaiz/sam)
+[![StyleCI](https://styleci.io/repos/73827252/shield?branch=master)](https://styleci.io/repos/73827252)
 [![Build Status](https://travis-ci.org/canalaiz/sam.svg?branch=master)](https://travis-ci.org/canalaiz/sam)
 [![Latest Stable Version](https://poser.pugx.org/canalaiz/sam/v/stable)](https://packagist.org/packages/canalaiz/sam)
 [![Latest Unstable Version](https://poser.pugx.org/canalaiz/sam/v/unstable)](https://packagist.org/packages/canalaiz/sam)
