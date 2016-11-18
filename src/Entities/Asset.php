@@ -1,16 +1,16 @@
 <?php
 
 /**
- * Canalaiz\Sam\Entities\Asset
+ * Canalaiz\Sam\Entities\Asset.
  *
  * @link      https://github.com/canalaiz/sam
+ *
  * @copyright 2016 Alessandro Canali
  */
-
 namespace Canalaiz\Sam\Entities;
 
-class Asset {
-
+class Asset
+{
     /**
      * Type of asset.
      */
