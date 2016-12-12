@@ -1,11 +1,11 @@
-# Simple Assets Manager (Laravel 5.3 Package)
+# Simple Assets Manager (Laravel 5.* Package)
 [![Total Downloads](https://poser.pugx.org/canalaiz/sam/downloads)](https://packagist.org/packages/canalaiz/sam)
 [![StyleCI](https://styleci.io/repos/73827252/shield?branch=master)](https://styleci.io/repos/73827252)
 [![Build Status](https://travis-ci.org/canalaiz/sam.svg?branch=master)](https://travis-ci.org/canalaiz/sam)
 [![Latest Stable Version](https://poser.pugx.org/canalaiz/sam/v/stable)](https://packagist.org/packages/canalaiz/sam)
 [![Latest Unstable Version](https://poser.pugx.org/canalaiz/sam/v/unstable)](https://packagist.org/packages/canalaiz/sam)
 
-Sam (short for Simple Assets Manager) is a library built for Laravel 5.3. It provides an easy way to add assets (usually stylesheet or javascript files) to the page after it has been rendered.
+Sam (short for Simple Assets Manager) is a library built for Laravel 5.*. It provides an easy way to add assets (usually stylesheet or javascript files) to the page after it has been rendered.
 Sam, by default, uses simple case-insensitive regular expressions to inject content within the html page. You can override this behaviour binding a different instance to ```Canalaiz\Sam\Contracts\HtmlInjectEngine```.
 
 ## Contents
