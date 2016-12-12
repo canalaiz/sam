@@ -7,6 +7,7 @@
  *
  * @copyright 2016 Alessandro Canali
  */
+
 namespace Canalaiz\Sam\Enums;
 
 class Position
