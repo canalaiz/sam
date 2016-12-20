@@ -66,7 +66,7 @@ class Sam
     {
         $this->AssetRepository->push(Enums\Type::CSS, Enums\Position::HEAD, $url, $minify);
     }
-    
+
     /**
      * Pushes Javascript asset into repository.
      *
@@ -128,7 +128,7 @@ class Sam
     public function process($html)
     {
         collect($this->AssetRepository->all())->each(function ($asset) use (&$html) {
-            $injectMethod = 'inject' . ucfirst($asset->type);
+            $injectMethod = 'inject'.ucfirst($asset->type);
             if (method_exists($this->HtmlInjectEngine, $injectMethod)) {
                 $html = $this->HtmlInjectEngine->{$injectMethod}($html, $asset);
             } else {
