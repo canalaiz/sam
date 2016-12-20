@@ -18,7 +18,7 @@ class SamTest extends TestCase
     {
         $expected = '<html><head><link href="http://www.acme.com/style.css" rel="stylesheet" type="text/css" /></head><body><!--PLACEHOLDER--></body></html>';
 
-        Sam::pushCss('http://www.acme.com/style.css');
+        Sam::pushCss('http://www.acme.com/style.css', false);
 
         $this->assertEquals($expected, Sam::process($this->html));
     }
@@ -27,7 +27,7 @@ class SamTest extends TestCase
     {
         $expected = '<html><head></head><body><!--PLACEHOLDER--><script src="http://www.acme.com/script.js" type="text/javascript" defer></script></body></html>';
 
-        Sam::pushJs('http://www.acme.com/script.js');
+        Sam::pushJs('http://www.acme.com/script.js', false);
 
         $this->assertEquals($expected, Sam::process($this->html));
     }

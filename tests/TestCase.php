@@ -9,7 +9,7 @@ abstract class TestCase extends Orchestra\Testbench\TestCase
 {
     protected $html;
 
-    protected function setUp()
+    public function setUp()
     {
         parent::setUp();
 
