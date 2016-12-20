@@ -20,7 +20,7 @@ interface HtmlInjectEngine
      * @return string $html
      */
     public function injectCss($html, $asset);
-
+    
     /**
      * Processes html with Javascript type asset.
      *
@@ -29,7 +29,25 @@ interface HtmlInjectEngine
      * @return string $html
      */
     public function injectJs($html, $asset);
-
+    
+    /**
+     * Processes html with Css Inline type asset.
+     *
+     * @param string $html
+     *
+     * @return string $html
+     */
+    public function injectInlineCss($html, $asset);
+    
+    /**
+     * Processes html with Javascript Inline type asset.
+     *
+     * @param string $html
+     *
+     * @return string $html
+     */
+    public function injectInlineJs($html, $asset);
+    
     /**
      * Processes html with Placeholder type asset.
      *

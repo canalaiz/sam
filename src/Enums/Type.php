@@ -13,8 +13,9 @@ namespace Canalaiz\Sam\Enums;
 class Type
 {
     const JS = 'js';
-    const JAVASCRIPT = 'js';
+    const INLINEJS = 'inlineJs';
     const CSS = 'css';
+    const INLINECSS = 'inlineCss';
     const PLACEHOLDER = 'placeholder';
     const TAG = 'tag';
 }

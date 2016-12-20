@@ -26,4 +26,9 @@ class Asset
      * Source of the asset.
      */
     public $src;
+    
+    /**
+     * Flag if asset must be minified.
+     */
+    public $minify;
 }

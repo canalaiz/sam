@@ -50,9 +50,9 @@ class Sam
      *
      * @return void
      */
-    public function pushJs($url)
+    public function pushJs($url, $minify = true)
     {
-        $this->AssetRepository->push(Enums\Type::JS, Enums\Position::BODY, $url);
+        $this->AssetRepository->push(Enums\Type::JS, Enums\Position::BODY, $url, $minify);
     }
 
     /**
@@ -62,9 +62,33 @@ class Sam
      *
      * @return void
      */
-    public function pushCss($url)
+    public function pushCss($url, $minify = true)
     {
-        $this->AssetRepository->push(Enums\Type::CSS, Enums\Position::HEAD, $url);
+        $this->AssetRepository->push(Enums\Type::CSS, Enums\Position::HEAD, $url, $minify);
+    }
+    
+    /**
+     * Pushes Javascript asset into repository.
+     *
+     * @param string $url
+     *
+     * @return void
+     */
+    public function pushInlineJs($url, $minify = true)
+    {
+        $this->AssetRepository->push(Enums\Type::INLINEJS, Enums\Position::BODY, $url, $minify);
+    }
+
+    /**
+     * Pushes Css asset into repository.
+     *
+     * @param string $url
+     *
+     * @return void
+     */
+    public function pushInlineCss($url, $minify = true)
+    {
+        $this->AssetRepository->push(Enums\Type::INLINECSS, Enums\Position::HEAD, $url, $minify);
     }
 
     /**
@@ -76,7 +100,7 @@ class Sam
      */
     public function pushTag($tag, $html)
     {
-        $this->AssetRepository->push(Enums\Type::TAG, $tag, $html);
+        $this->AssetRepository->push(Enums\Type::TAG, $tag, $html, false);
     }
 
     /**
@@ -89,7 +113,7 @@ class Sam
      */
     public function pushPlaceholder($placeholder, $html)
     {
-        $this->AssetRepository->push(Enums\Type::PLACEHOLDER, $placeholder, $html);
+        $this->AssetRepository->push(Enums\Type::PLACEHOLDER, $placeholder, $html, false);
     }
 
     /**
@@ -104,7 +128,7 @@ class Sam
     public function process($html)
     {
         collect($this->AssetRepository->all())->each(function ($asset) use (&$html) {
-            $injectMethod = 'inject'.ucfirst($asset->type);
+            $injectMethod = 'inject' . ucfirst($asset->type);
             if (method_exists($this->HtmlInjectEngine, $injectMethod)) {
                 $html = $this->HtmlInjectEngine->{$injectMethod}($html, $asset);
             } else {
