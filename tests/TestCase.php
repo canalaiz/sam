@@ -19,14 +19,14 @@ abstract class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            'Canalaiz\Sam\SamServiceProvider'
+            'Canalaiz\Sam\SamServiceProvider',
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'Sam' => 'Canalaiz\Sam\Facades\Sam'
+            'Sam' => 'Canalaiz\Sam\Facades\Sam',
         ];
     }
 }
