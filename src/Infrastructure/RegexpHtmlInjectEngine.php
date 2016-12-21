@@ -98,40 +98,43 @@ class RegexpHtmlInjectEngine implements HtmlInjectEngine
 
     private function resourceToAsset($asset)
     {
-        $asset = Cache::remember($asset->src, 60 * 24 * 7, function () use ($asset) {
+        if (Cache::has($asset->src)) {
+            return Cache::get($asset->src);
+        } 
+        
+        try {
+            $oldsrc = $asset->src;
             $client = new \GuzzleHttp\Client();
-            try {
-                $request = $client->request('GET', $asset->src);
 
-                if ($request->getBody() != '') {
-                    $resource = $request->getBody();
-                } else {
-                    $resource = '/* resource responded with status '.$request->getStatus().' */';
-                }
+            $request = $client->request('GET', $asset->src);
 
-                $filename = public_path(str_slug($asset->src));
-                if ($asset->type == Enums\Type::JS || $asset->type == Enums\Type::INLINEJS) {
-                    $minifier = new \MatthiasMullie\Minify\JS();
-                    $filename .= '.js';
-                } else {
-                    $minifier = new \MatthiasMullie\Minify\CSS();
-                    $filename .= '.css';
-                }
-                $minifier->add($resource);
-                $minifier->minify($filename);
-
-                if ($asset->type == Enums\Type::INLINEJS || $asset->type == Enums\Type::INLINECSS) {
-                    $asset->src = $minifier->minify();
-                } else {
-                    $asset->src = asset($filename);
-                }
-            } catch (\Exception $e) {
-                $asset->src = '/* failed request with exception '.$e->getMessage().' */';
+            if ($request->getBody() != '') {
+                $resource = $request->getBody();
+            } else {
+                $resource = '/* resource responded with status '.$request->getStatus().' */';
             }
 
-            return $asset;
-        });
+            $filename = public_path(str_slug($asset->src));
+            if ($asset->type == Enums\Type::JS || $asset->type == Enums\Type::INLINEJS) {
+                $minifier = new \MatthiasMullie\Minify\JS();
+                $filename .= '.js';
+            } else {
+                $minifier = new \MatthiasMullie\Minify\CSS();
+                $filename .= '.css';
+            }
+            $minifier->add($resource);
+            $minifier->minify($filename);
 
+            if ($asset->type == Enums\Type::INLINEJS || $asset->type == Enums\Type::INLINECSS) {
+                $asset->src = $minifier->minify();
+            } else {
+                $asset->src = asset($filename);
+            }
+            Cache::put($oldsrc, $asset, 60 * 24 * 7);
+        } catch (\Exception $e) {
+            $asset->src = '/* failed request with exception '.$e->getMessage().' */';
+        }
+ 
         return $asset;
-    }
+    }    
 }
