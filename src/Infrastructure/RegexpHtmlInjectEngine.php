@@ -100,8 +100,8 @@ class RegexpHtmlInjectEngine implements HtmlInjectEngine
     {
         if (Cache::has($asset->src)) {
             return Cache::get($asset->src);
-        } 
-        
+        }
+
         try {
             $oldsrc = $asset->src;
             $client = new \GuzzleHttp\Client();
@@ -134,7 +134,7 @@ class RegexpHtmlInjectEngine implements HtmlInjectEngine
         } catch (\Exception $e) {
             $asset->src = '/* failed request with exception '.$e->getMessage().' */';
         }
- 
+
         return $asset;
-    }    
+    }
 }
