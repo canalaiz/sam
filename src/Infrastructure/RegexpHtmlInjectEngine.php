@@ -128,7 +128,7 @@ class RegexpHtmlInjectEngine implements HtmlInjectEngine
             if ($asset->type == Enums\Type::INLINEJS || $asset->type == Enums\Type::INLINECSS) {
                 $asset->src = $minifier->minify();
             } else {
-                $asset->src = '//' . (basename($filename));
+                $asset->src = '//'.(basename($filename));
             }
             Cache::put($oldsrc, $asset, 60 * 24 * 7);
         } catch (\Exception $e) {
