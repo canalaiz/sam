@@ -85,20 +85,22 @@ class SamTest extends TestCase
 
         $this->assertEquals($expected, Sam::process($this->html));
     }
-    
-    public function testPushCssMinify() {
+
+    public function testPushCssMinify()
+    {
         $expected = '<html><head><link href="//httpsmaxcdnbootstrapcdncombootstrap337cssbootstrapmincss.css" rel="stylesheet" type="text/css" /></head><body><!--PLACEHOLDER--></body></html>';
-        
+
         Sam::pushCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
-        
+
         $this->assertEquals($expected, Sam::process($this->html));
     }
-    
-    public function testPushJsMinify() {
+
+    public function testPushJsMinify()
+    {
         $expected = '<html><head></head><body><!--PLACEHOLDER--><script src="//httpsmaxcdnbootstrapcdncombootstrap337jsbootstrapminjs.js" type="text/javascript" defer></script></body></html>';
-        
+
         Sam::pushJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
-        
+
         $this->assertEquals($expected, Sam::process($this->html));
-    }   
+    }
 }
