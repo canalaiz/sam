@@ -26,7 +26,7 @@ class Sam
     {
         $response = $next($request);
 
-        $html = \Canalaiz\Sam\Facades\Sam::process($response->getOriginalContent());
+        $html = \Canalaiz\Sam\Facades\Sam::process($response->content());
 
         $response->setContent($html);
 

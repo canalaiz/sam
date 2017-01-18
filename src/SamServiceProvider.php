@@ -22,7 +22,7 @@ class SamServiceProvider extends ServiceProvider
     {
         // bind contracts to concrete implementation as default
         $this->app->bind('Canalaiz\Sam\Contracts\AssetRepository', 'Canalaiz\Sam\Repositories\ArrayAssetRepository');
-        $this->app->bind('Canalaiz\Sam\Contracts\HtmlInjectEngine', 'Canalaiz\Sam\Infrastructure\RegexpHtmlInjectEngine');
+        $this->app->bind('Canalaiz\Sam\Contracts\HtmlInjectEngine', 'Canalaiz\Sam\Infrastructure\StringHtmlInjectEngine');
 
         // declare facade singleton
         $this->app->singleton('sam', function ($app) {

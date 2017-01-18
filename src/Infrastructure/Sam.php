@@ -50,7 +50,7 @@ class Sam
      *
      * @return void
      */
-    public function pushJs($url, $minify = true)
+    public function pushJs($url, $minify = false)
     {
         $this->AssetRepository->push(Enums\Type::JS, Enums\Position::BODY, $url, $minify);
     }
@@ -62,7 +62,7 @@ class Sam
      *
      * @return void
      */
-    public function pushCss($url, $minify = true)
+    public function pushCss($url, $minify = false)
     {
         $this->AssetRepository->push(Enums\Type::CSS, Enums\Position::HEAD, $url, $minify);
     }
@@ -76,7 +76,7 @@ class Sam
      */
     public function pushInlineJs($url, $minify = true)
     {
-        $this->AssetRepository->push(Enums\Type::INLINEJS, Enums\Position::BODY, $url, $minify);
+        $this->AssetRepository->push(Enums\Type::JS, Enums\Position::BODY, $url, $minify, true);
     }
 
     /**
@@ -88,7 +88,7 @@ class Sam
      */
     public function pushInlineCss($url, $minify = true)
     {
-        $this->AssetRepository->push(Enums\Type::INLINECSS, Enums\Position::HEAD, $url, $minify);
+        $this->AssetRepository->push(Enums\Type::CSS, Enums\Position::HEAD, $url, $minify, true);
     }
 
     /**
@@ -100,7 +100,7 @@ class Sam
      */
     public function pushTag($tag, $html)
     {
-        $this->AssetRepository->push(Enums\Type::TAG, $tag, $html, false);
+        $this->AssetRepository->push(Enums\Type::TAG, $tag, $html);
     }
 
     /**
@@ -113,7 +113,7 @@ class Sam
      */
     public function pushPlaceholder($placeholder, $html)
     {
-        $this->AssetRepository->push(Enums\Type::PLACEHOLDER, $placeholder, $html, false);
+        $this->AssetRepository->push(Enums\Type::PLACEHOLDER, $placeholder, $html);
     }
 
     /**
@@ -130,7 +130,7 @@ class Sam
         collect($this->AssetRepository->all())->each(function ($asset) use (&$html) {
             $injectMethod = 'inject'.ucfirst($asset->type);
             if (method_exists($this->HtmlInjectEngine, $injectMethod)) {
-                $html = $this->HtmlInjectEngine->{$injectMethod}($html, $asset);
+                $html = $this->HtmlInjectEngine->{$injectMethod}($html, $asset->convert());
             } else {
                 throw new \InvalidArgumentException("Inject [{$asset->type}] is not supported.");
             }

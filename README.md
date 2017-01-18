@@ -6,14 +6,18 @@
 [![Latest Unstable Version](https://poser.pugx.org/canalaiz/sam/v/unstable)](https://packagist.org/packages/canalaiz/sam)
 
 Sam (short for Simple Assets Manager) is a library built for Laravel 5.*. It provides an easy way to add assets (usually stylesheet or javascript files) to the page after it has been rendered.
-Sam, by default, uses simple case-insensitive regular expressions to inject content within the html page. You can override this behaviour binding a different instance to ```Canalaiz\Sam\Contracts\HtmlInjectEngine```.
+Sam, by default, uses simple substr and stripos to inject content within the html page. You can override this behaviour binding a different instance to ```Canalaiz\Sam\Contracts\HtmlInjectEngine```.
 
 ## Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
     - [Css](#css)
+      - [Normal](#css-normal)
+      - [Inline](#css-inline)
     - [Javascript](#javascript)
+      - [Normal](#javascript-normal)
+      - [Inline](#javascript-inline)
     - [Placeholder](#placeholder)
     - [Tag](#tag)
 - [License](#license)
@@ -56,18 +60,50 @@ use Sam;
 
 ### Css
 
+Css can be appended within document in two different ways: normal and inline. An optional `minify` parameter can be passed as second argument to request css minifying. This parameter defaults to `false` on `Sam::pushCss` and `true` to `Sam::pushInlineCss`. Minified assets are downloaded first and then served locally.
+
+#### Css-Normal
 The following command appends a stylesheet tag declaration before the closing of the HEAD tag:
 
 ```php
 Sam::pushCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
 ```
 
+If you need to minify the asset, use this command:
+
+```php
+Sam::pushCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', true);
+```
+
+#### Css-Inline
+The following command appends a stylesheet tag declaration before the closing of the HEAD tag, but content of original source url will be directly injected in the html within a tag:
+
+```php
+Sam::pushInlineCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+```
+
 ### Javascript 
 
-The following command appends a script tag declaration ts before the closing of the BODY tag:
+Javascript can be appended within document in two different ways: normal and inline. An optional `minify` parameter can be passed as second argument to request css minifying. This parameter defaults to `false` on `Sam::pushJs` and `true` to `Sam::pushInlineJs`. Minified assets are downloaded first and then served locally.
+
+#### Javascript-Normal
+The following command appends a script tag declaration before the closing of the BODY tag:
 
 ```php
 Sam::pushJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+```
+
+If you need to minify the asset, use this command:
+
+```php
+Sam::pushJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', true);
+```
+
+#### Javascript-Inline
+The following command appends a script tag declaration before the closing of the BODY tag, but content of original source url will be directly injected in the html within a tag:
+
+```php
+Sam::pushInlineJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
 ```
 
 ### Placeholder

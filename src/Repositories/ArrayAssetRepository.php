@@ -22,14 +22,15 @@ class ArrayAssetRepository implements Contracts\AssetRepository
         return $this->array;
     }
 
-    public function push($type, $position, $src, $minify = false)
+    public function push($type, $position, $url, $minify = false, $inline = false)
     {
         $asset = new Asset();
 
         $asset->type = $type;
         $asset->position = $position;
-        $asset->src = $src;
+        $asset->url = $url;
         $asset->minify = $minify;
+        $asset->inline = $inline;
 
         $this->array[] = $asset;
 
