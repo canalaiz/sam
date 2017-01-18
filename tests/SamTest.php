@@ -87,7 +87,7 @@ class SamTest extends TestCase
     }
     
     public function testPushCssMinify() {
-        $expected = '<html><head><link href="//httpsmaxcdnbootstrapcdncombootstrap337cssbootstrapmincss.css" rel="stylesheet" type="text/css" /></head><body><!--PLACEHOLDER--></body></html>';
+        $expected = '<html><head><link href="//sam_minified/httpsmaxcdnbootstrapcdncombootstrap337cssbootstrapmincss.css" rel="stylesheet" type="text/css" /></head><body><!--PLACEHOLDER--></body></html>';
         
         Sam::pushCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', true);
         
@@ -95,7 +95,7 @@ class SamTest extends TestCase
     }
     
     public function testPushJsMinify() {
-        $expected = '<html><head></head><body><!--PLACEHOLDER--><script src="//httpsmaxcdnbootstrapcdncombootstrap337jsbootstrapminjs.js" type="text/javascript" defer></script></body></html>';
+        $expected = '<html><head></head><body><!--PLACEHOLDER--><script src="//sam_minified/httpsmaxcdnbootstrapcdncombootstrap337jsbootstrapminjs.js" type="text/javascript" defer></script></body></html>';
         
         Sam::pushJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', true);
         

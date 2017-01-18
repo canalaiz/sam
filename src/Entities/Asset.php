@@ -79,7 +79,7 @@ class Asset
         if (!file_exists($filename)) { File::makeDirectory(public_path('sam_minified/'), 0775, true, true); }
         File::put($filename, $this->src);
         
-        if ($this->inline === false) { $this->src = '//' . (basename($filename)); }    
+        if ($this->inline === false) { $this->src = '//' . 'sam_minified/' . (basename($filename)); }    
         Cache::put($this->type . $this->url, $this, 60 * 24 * 7);
 
         return $this;
