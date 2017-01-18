@@ -10,8 +10,8 @@
 
 namespace Canalaiz\Sam\Entities;
 
-use Canalaiz\Sam\Enums;
 use Cache;
+use Canalaiz\Sam\Enums;
 use File;
 
 class Asset
@@ -30,7 +30,7 @@ class Asset
      * Url of the asset.
      */
     public $url;
-    
+
     /**
      * Source of the asset.
      */
@@ -40,18 +40,19 @@ class Asset
      * Flag if asset must be minified.
      */
     public $minify;
-    
+
     /**
      * Flag if asset must be viewed inline.
      */
-    public $inline;    
+    public $inline;
 
     /**
-     * Fetch remote asset
-     * 
+     * Fetch remote asset.
+     *
      * @return $this
      */
-    public function fetch() {
+    public function fetch()
+    {
         try {
             $client = new \GuzzleHttp\Client();
             $request = $client->request('GET', $this->url);
@@ -64,30 +65,34 @@ class Asset
         } catch (\Exception $e) {
             $this->src = '/* failed request with exception '.$e->getMessage().' */';
         }
-        
+
         return $this;
     }
 
     /**
-     * Store asset
-     * 
+     * Store asset.
+     *
      * @return $this
      */
     public function store()
     {
-        $filename = public_path('sam_minified/' . str_slug($this->url) . '.' . $this->type);
-        if (!file_exists($filename)) { File::makeDirectory(public_path('sam_minified/'), 0775, true, true); }
+        $filename = public_path('sam_minified/'.str_slug($this->url).'.'.$this->type);
+        if (!file_exists($filename)) {
+            File::makeDirectory(public_path('sam_minified/'), 0775, true, true);
+        }
         File::put($filename, $this->src);
-        
-        if ($this->inline === false) { $this->src = '//' . 'sam_minified/' . (basename($filename)); }    
-        Cache::put($this->type . $this->url, $this, 60 * 24 * 7);
+
+        if ($this->inline === false) {
+            $this->src = '//'.'sam_minified/'.(basename($filename));
+        }
+        Cache::put($this->type.$this->url, $this, 60 * 24 * 7);
 
         return $this;
     }
-    
+
     /**
-     * Minify asset
-     * 
+     * Minify asset.
+     *
      * @return $this
      */
     public function minify()
@@ -97,32 +102,36 @@ class Asset
         } else {
             $minifier = new \MatthiasMullie\Minify\CSS();
         }
-        
+
         $minifier->add($this->src);
         $this->src = $minifier->minify();
-        
+
         return $this;
-    }    
-    
+    }
+
     /**
-     * Converts current asset into usable
-     * 
+     * Converts current asset into usable.
+     *
      * @return $this
      */
-    public function convert() 
+    public function convert()
     {
         if ($this->minify || $this->inline) {
-            if (Cache::has($this->type . $this->url)) { return Cache::get($this->type . $this->url); }
-            
+            if (Cache::has($this->type.$this->url)) {
+                return Cache::get($this->type.$this->url);
+            }
+
             $this->fetch();
-            
-            if ($this->minify) { $this->minify(); }
-            
+
+            if ($this->minify) {
+                $this->minify();
+            }
+
             $this->store();
         } else {
             $this->src = $this->url;
         }
-      
+
         return $this;
     }
 }
