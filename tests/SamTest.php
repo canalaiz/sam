@@ -18,7 +18,7 @@ class SamTest extends TestCase
     {
         $expected = '<html><head><link href="http://www.acme.com/style.css" rel="stylesheet" type="text/css" /></head><body><!--PLACEHOLDER--></body></html>';
 
-        Sam::pushCss('http://www.acme.com/style.css', false);
+        Sam::pushCss('http://www.acme.com/style.css');
 
         $this->assertEquals($expected, Sam::process($this->html));
     }
@@ -27,7 +27,7 @@ class SamTest extends TestCase
     {
         $expected = '<html><head></head><body><!--PLACEHOLDER--><script src="http://www.acme.com/script.js" type="text/javascript" defer></script></body></html>';
 
-        Sam::pushJs('http://www.acme.com/script.js', false);
+        Sam::pushJs('http://www.acme.com/script.js');
 
         $this->assertEquals($expected, Sam::process($this->html));
     }
@@ -89,7 +89,7 @@ class SamTest extends TestCase
     public function testPushCssMinify() {
         $expected = '<html><head><link href="//httpsmaxcdnbootstrapcdncombootstrap337cssbootstrapmincss.css" rel="stylesheet" type="text/css" /></head><body><!--PLACEHOLDER--></body></html>';
         
-        Sam::pushCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css');
+        Sam::pushCss('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', true);
         
         $this->assertEquals($expected, Sam::process($this->html));
     }
@@ -97,7 +97,7 @@ class SamTest extends TestCase
     public function testPushJsMinify() {
         $expected = '<html><head></head><body><!--PLACEHOLDER--><script src="//httpsmaxcdnbootstrapcdncombootstrap337jsbootstrapminjs.js" type="text/javascript" defer></script></body></html>';
         
-        Sam::pushJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js');
+        Sam::pushJs('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js', true);
         
         $this->assertEquals($expected, Sam::process($this->html));
     }   
