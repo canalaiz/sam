@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": [
         "library", "asset", "css", "javascript", "php", "laravel"
-    ],  
+    ],
     "license": "BSD-3-Clause",
     "authors": [
         {
@@ -20,17 +20,17 @@
         "matthiasmullie/minify": "1.3.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "~4.0|~5.0",
+        "phpunit/phpunit": "~5.0",
         "orchestra/testbench": "~3.0"
-    },  
+    },
     "autoload": {
         "psr-4": {
             "Canalaiz\\Sam\\": "src/"
         }
     },
     "autoload-dev": {
-        "classmap": [ 
-            "tests/TestCase.php" 
+        "classmap": [
+            "tests/TestCase.php"
         ]
     }
 }
