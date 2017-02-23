@@ -31,7 +31,7 @@ class Sam
     protected $HtmlInjectEngine;
 
     /**
-     * Create a new Cache manager instance.
+     * Create a new Sam instance.
      *
      * @param \Canalaiz\Sam\Contracts\AssetRepository $AssetRepository
      *
