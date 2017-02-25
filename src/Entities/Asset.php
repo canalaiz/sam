@@ -83,7 +83,7 @@ class Asset
         File::put($filename, $this->src);
 
         if ($this->inline === false) {
-            $this->src = '//'.'sam_minified/'.(basename($filename));
+            $this->src = '/'.'sam_minified/'.(basename($filename));
         }
         Cache::put($this->type.$this->url, $this, 60 * 24 * 7);
 
